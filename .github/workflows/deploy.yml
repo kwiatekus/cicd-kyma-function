@@ -20,8 +20,10 @@ jobs:
         run: | 
           curl -Lo kyma https://storage.googleapis.com/kyma-cli-stable/kyma-linux
           chmod +x kyma
+          echo "{path}"
+          echo "{path}/kyma"
           echo "{path}/kyma" >> $GITHUB_PATH
       - name: Run Kyma CLI
         run: |         
-          kyma version 
+          echo $GITHUB_PATH
       
