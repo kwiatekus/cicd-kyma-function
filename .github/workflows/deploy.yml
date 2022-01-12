@@ -13,8 +13,8 @@ jobs:
       #   with:
       #     method: kubeconfig
       #     kubeconfig: ${{ secrets.DEV_KUBECONFIG }}
-      - uses: kwiatekus/setup-kymaCLI
-        with:
-          version: '2.0.2'
+      # - uses: kwiatekus/setup-kymaCLI
+      #   with:
+      #     version: '2.0.2'
                 
       
