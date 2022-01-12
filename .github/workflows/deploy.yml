@@ -13,8 +13,14 @@ jobs:
       #   with:
       #     method: kubeconfig
       #     kubeconfig: ${{ secrets.DEV_KUBECONFIG }}
-      - uses: kwiatekus/setup-kymaCLI@main
-        with:
-          version: '2.0.2'
-                
+      # - uses: kwiatekus/setup-kymaCLI@main
+      #   with:
+      #     version: '2.0.2'
+      - name: Install Kyma CLI
+        run: | 
+          curl -Lo kyma https://storage.googleapis.com/kyma-cli-stable/kyma-linux
+          chmod +x kyma
+      - name: Run Kyma CLI
+        run: |         
+          kyma version 
       
