@@ -20,6 +20,6 @@ jobs:
       - name: Deploy emiter function via Kyma CLI
         working-directory: emitter
         run: kyma apply function
-      - name: Deploy recever function via Kyma CLI
-        working-directory: emitter
+      - name: Deploy receiver function via Kyma CLI
+        working-directory: receiver
         run: kyma apply function
