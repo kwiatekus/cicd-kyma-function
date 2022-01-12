@@ -1,29 +1,25 @@
 name: deploy-to-kyma
-
 on:
-  workflow_dispatch:
-
+  push:
+    branches:
+      - main
 jobs:
-  
   deploy-to-kyma:
     runs-on: ubuntu-latest
     steps:
-      # - uses: actions/checkout@v2
-      # - uses: azure/k8s-set-context@v1
-      #   with:
-      #     method: kubeconfig
-      #     kubeconfig: ${{ secrets.DEV_KUBECONFIG }}
-      # - uses: kwiatekus/setup-kymaCLI@main
-      #   with:
-      #     version: '2.0.2'
+      - uses: actions/checkout@v2
+      - uses: azure/k8s-set-context@v1
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.DEV_KUBECONFIG }}
       - name: Install Kyma CLI
         run: | 
           curl -Lo kyma https://storage.googleapis.com/kyma-cli-stable/kyma-linux
           chmod +x kyma
-          echo "$(eval pwd)"
           echo "$(eval pwd)" >> $GITHUB_PATH
-      - name: Run Kyma CLI
-        run: |         
-          echo $GITHUB_PATH
-          kyma version
-      
+      - name: Deploy emiter function via Kyma CLI
+        working-directory: emitter
+        run: kyma apply function
+      - name: Deploy recever function via Kyma CLI
+        working-directory: emitter
+        run: kyma apply function
