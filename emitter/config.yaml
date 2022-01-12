@@ -10,5 +10,6 @@ apiRules:
       rules:
         - methods:
             - GET
+            - POST
           accessStrategies:
             - handler: allow 
