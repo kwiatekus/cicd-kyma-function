@@ -1,0 +1,20 @@
+name: deploy-to-kyma
+
+on:
+  workflow_dispatch:
+
+jobs:
+  
+  deploy-to-kyma:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      # - uses: azure/k8s-set-context@v1
+      #   with:
+      #     method: kubeconfig
+      #     kubeconfig: ${{ secrets.DEV_KUBECONFIG }}
+      - uses: kwiatekus/setup-kymaCLI
+        with:
+          version: '2.0.2'
+                
+      
