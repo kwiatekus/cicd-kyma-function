@@ -9,18 +9,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: azure/k8s-set-context@v1
+#       - uses: azure/k8s-set-context@v1
+#         with:
+#           method: kubeconfig
+#           kubeconfig: ${{ secrets.DEV_KUBECONFIG }}
+#       - name: Install Kyma CLI
+#         run: | 
+#           curl -Lo kyma https://storage.googleapis.com/kyma-cli-stable/kyma-linux
+#           chmod +x kyma
+#           echo "$(eval pwd)" >> $GITHUB_PATH
+#       - name: Deploy emiter function via Kyma CLI
+#         working-directory: emitter
+#         run: kyma apply function
+#       - name: Deploy receiver function via Kyma CLI
+#         working-directory: receiver
+#         run: kyma apply function
+      - uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.DEV_KUBECONFIG }}
         with:
-          method: kubeconfig
-          kubeconfig: ${{ secrets.DEV_KUBECONFIG }}
-      - name: Install Kyma CLI
-        run: | 
-          curl -Lo kyma https://storage.googleapis.com/kyma-cli-stable/kyma-linux
-          chmod +x kyma
-          echo "$(eval pwd)" >> $GITHUB_PATH
-      - name: Deploy emiter function via Kyma CLI
-        working-directory: emitter
-        run: kyma apply function
-      - name: Deploy receiver function via Kyma CLI
-        working-directory: receiver
-        run: kyma apply function
+          args: get pods -n ptesny
